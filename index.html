@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Latihan ASKA Praktik Informatika – Kelas IX</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#1d2330;--mut:#5d6677;--line:#dfe3ea;--pri:#1f5fbf;--pri2:#e8f0fc;--ok:#1f8a4c;--okb:#e7f6ed;--no:#c0392b;--nob:#fdecea;--warn:#a86800;--warnb:#fff6e0;--code:#0f1724}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.5}
+header{background:#14233c;color:#fff;padding:10px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+header h1{font-size:16px;margin:0;font-weight:650;letter-spacing:.2px}
+header .sp{flex:1}
+header .who{font-size:13px;opacity:.9}
+header button{background:transparent;border:1px solid #ffffff55;color:#fff;border-radius:6px;padding:5px 10px;cursor:pointer;font-size:13px}
+main{max-width:1280px;margin:0 auto;padding:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px}
+h2{font-size:20px;margin:0 0 6px}
+h3{font-size:16px;margin:0 0 8px}
+.mut{color:var(--mut)}
+.btn{border:1px solid var(--line);background:#fff;border-radius:7px;padding:8px 14px;font-size:14px;cursor:pointer;color:var(--ink);font-weight:550}
+.btn:hover{border-color:#b9c2d0}
+.btn.pri{background:var(--pri);border-color:var(--pri);color:#fff}
+.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+select,input[type=text]{font-size:15px;padding:9px 10px;border:1px solid var(--line);border-radius:7px;width:100%;background:#fff}
+label.f{display:block;font-weight:600;margin:12px 0 5px;font-size:14px}
+#login{max-width:440px;margin:40px auto}
+.grid6{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-top:14px}
+.jenis{display:flex;flex-direction:column;gap:8px}
+.jenis .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.tag{font-size:12px;border-radius:20px;padding:2px 9px;font-weight:600;white-space:nowrap}
+.tag.Mudah{background:#e7f6ed;color:#1f7a45}.tag.Sedang{background:#fff3db;color:#946000}.tag.Sukar{background:#fde8e6;color:#b03a2e}
+.bar{height:7px;background:#edf0f4;border-radius:5px;overflow:hidden}.bar>i{display:block;height:100%;background:var(--ok)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tabs{display:flex;gap:6px;margin:4px 0 12px}
+.tabs .btn.act{background:var(--pri2);border-color:var(--pri);color:var(--pri)}
+/* latihan */
+#lat{display:grid;grid-template-columns:minmax(320px,5fr) 7fr;gap:16px;align-items:start}
+@media (max-width:900px){#lat{grid-template-columns:1fr}}
+.soalteks p{margin:4px 0}
+.soalteks .lbl{font-weight:650}
+.soalteks ul{margin:2px 0 4px 18px;padding:0}
+.contoh{background:#f3f6fb;border-left:3px solid var(--pri);padding:8px 10px;border-radius:4px;font-size:14px;margin-top:8px}
+pre,code,textarea.ed{font-family:ui-monospace,"Cascadia Code",Consolas,"Courier New",monospace}
+pre{background:var(--code);color:#e6edf6;padding:10px 12px;border-radius:7px;overflow:auto;font-size:13.5px;line-height:1.45;margin:8px 0}
+code{background:#eef1f6;padding:1px 4px;border-radius:4px;font-size:.92em}
+.edwrap{display:flex;border:1px solid #2a3446;border-radius:8px;overflow:hidden;background:var(--code);height:340px}
+.gut{background:#162033;color:#6b7891;text-align:right;padding:10px 8px;font-size:14px;line-height:21px;user-select:none;overflow:hidden;min-width:40px;white-space:pre}
+.gut .e{color:#ff8a80;font-weight:700}
+textarea.ed{flex:1;border:0;outline:0;resize:none;background:transparent;color:#e6edf6;font-size:14px;line-height:21px;padding:10px;white-space:pre;overflow:auto;tab-size:4;caret-color:#fff}
+.inout{display:grid;grid-template-columns:1fr 2fr;gap:10px;margin-top:10px}
+@media (max-width:600px){.inout{grid-template-columns:1fr}}
+.inout textarea{width:100%;height:120px;font-family:ui-monospace,Consolas,monospace;font-size:13.5px;border:1px solid var(--line);border-radius:7px;padding:8px;resize:vertical}
+.out{background:#0f1724;color:#d8e3f0;border-radius:7px;padding:8px 10px;height:120px;overflow:auto;font-family:ui-monospace,Consolas,monospace;font-size:13.5px;white-space:pre-wrap}
+.out .err{color:#ff9b8f}
+.sm{font-size:13px}
+.hasil{margin-top:12px}
+.hasil table{width:100%;border-collapse:collapse;font-size:13.5px}
+.hasil th,.hasil td{border:1px solid var(--line);padding:5px 7px;text-align:left;vertical-align:top}
+.hasil th{background:#f1f3f6}
+.hasil td.k{font-family:ui-monospace,Consolas,monospace;white-space:pre-wrap}
+.b-ok{background:var(--okb);color:var(--ok);font-weight:650}.b-no{background:var(--nob);color:var(--no);font-weight:650}
+.banner{border-radius:8px;padding:10px 12px;margin-top:10px;font-weight:600}
+.banner.ok{background:var(--okb);color:var(--ok)}.banner.no{background:var(--nob);color:var(--no)}
+.box{border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin-top:10px;background:#fbfcfd}
+.awas{background:var(--warnb);border-left:3px solid #e0a100;padding:8px 10px;border-radius:4px;margin:10px 0;font-size:14px}
+table.t{border-collapse:collapse;margin:8px 0;font-size:14px}table.t td,table.t th{border:1px solid var(--line);padding:5px 8px;text-align:left}table.t th{background:#f1f3f6}
+.materi h4{margin:14px 0 6px}
+.modal{position:fixed;inset:0;background:#0008;display:flex;align-items:flex-start;justify-content:center;padding:30px 12px;z-index:50;overflow:auto}
+.modal .card{max-width:820px;width:100%}
+.status{font-size:12.5px;color:var(--mut)}
+.hide{display:none!important}
+.spin{display:inline-block;width:12px;height:12px;border:2px solid #fff6;border-top-color:#fff;border-radius:50%;animation:s .8s linear infinite;vertical-align:-1px}
+@keyframes s{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Latihan ASKA Praktik Informatika · Kelas IX</h1>
+  <span class="sp"></span>
+  <span class="who" id="who"></span>
+  <button id="btnKeluar" class="hide">Ganti murid</button>
+</header>
+<main id="app"></main>
+
+<script src="soal.js"></script>
+<script src="materi.js"></script>
+<script>
+/* ===== KONFIGURASI ===== */
+const CONFIG = { APPS_SCRIPT_URL: '' }; // isi dengan URL Web App Apps Script (…/exec)
+const KELAS = ['IX-A','IX-B','IX-C','IX-D','IX-E','IX-F','IX-G'];
+const PARAM = new URLSearchParams(location.search);
+const API = PARAM.get('api') || CONFIG.APPS_SCRIPT_URL;
+
+const $ = (s, el = document) => el.querySelector(s);
+const esc = (s) => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LS = { get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+             set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
+
+let USER = LS.get('aska_lat_user', null);
+
+/* ===== Python worker ===== */
+let worker = null, wReady = false, wQueue = {}, wSeq = 0;
+function startWorker() {
+  wReady = false; worker = new Worker('worker.js');
+  worker.onmessage = (e) => {
+    const m = e.data;
+    if (m.id === 'siap') { wReady = true; setStatus('Python siap.'); return; }
+    if (m.id === 'boot') return;
+    const cb = wQueue[m.id]; if (cb) { delete wQueue[m.id]; cb(m); }
+  };
+  setStatus('Memuat Python… (pertama kali bisa 10–30 detik)');
+}
+function runPy(code, inputs, echo, ms = 4000) {
+  return new Promise((res) => {
+    const id = ++wSeq;
+    const extra = wReady ? 0 : 60000;
+    const t = setTimeout(() => {
+      if (wQueue[id]) { delete wQueue[id]; worker.terminate(); startWorker();
+        res({ out: '', err: { jenis: 'Waktu habis', baris: null, pesan: 'Program berjalan terlalu lama (mungkin perulangan tidak berhenti atau menunggu input).' } }); }
+    }, ms + extra);
+    wQueue[id] = (m) => { clearTimeout(t); res(m); };
+    worker.postMessage({ id, code, inputs, echo });
+  });
+}
+function setStatus(t) { const s = $('#pyStatus'); if (s) s.textContent = t; }
+
+/* ===== API ===== */
+async function apiGet(params) {
+  const r = await fetch(API + '?' + new URLSearchParams(params));
+  return r.json();
+}
+function kirimLog(rec) {
+  const antre = LS.get('aska_lat_antre', []); antre.push(rec); LS.set('aska_lat_antre', antre.slice(-300));
+  flush();
+}
+let flushing = false;
+async function flush() {
+  if (!API || flushing) return;
+  const antre = LS.get('aska_lat_antre', []); if (!antre.length) return;
+  flushing = true;
+  try {
+    const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ aksi: 'log', data: antre }) });
+    const j = await r.json();
+    if (j.ok) { const now = LS.get('aska_lat_antre', []); LS.set('aska_lat_antre', now.slice(antre.length)); }
+  } catch (e) { /* coba lagi nanti */ }
+  flushing = false;
+}
+setInterval(flush, 30000);
+window.addEventListener('online', flush);
+
+/* ===== Progres lokal ===== */
+const keyProg = () => `aska_lat_prog_${USER.kelas}_${USER.absen}`;
+function prog() { return LS.get(keyProg(), {}); }
+function catatProg(no, benar) {
+  const p = prog(); const x = p[no] || { coba: 0, benar: 0 }; x.coba++; if (benar) x.benar++; p[no] = x; LS.set(keyProg(), p);
+}
+
+/* ===== Layar: login ===== */
+function header() {
+  $('#who').textContent = USER ? `${USER.nama} · ${USER.kelas} · absen ${USER.absen}` : '';
+  $('#btnKeluar').classList.toggle('hide', !USER);
+}
+$('#btnKeluar').onclick = () => { if (confirm('Ganti murid? Progres tetap tersimpan.')) { USER = null; LS.set('aska_lat_user', null); header(); viewLogin(); } };
+
+function viewLogin() {
+  header();
+  $('#app').innerHTML = `
+  <div id="login" class="card">
+    <h2>Masuk latihan</h2>
+    <p class="mut">Pilih kelas, lalu pilih namamu.</p>
+    <label class="f">Kelas</label>
+    <select id="lKelas"><option value="">— pilih kelas —</option>${KELAS.map(k => `<option>${k}</option>`).join('')}</select>
+    <label class="f">Nama</label>
+    <select id="lNama" disabled><option value="">— pilih kelas dulu —</option></select>
+    <p id="lMsg" class="sm mut"></p>
+    <button class="btn pri" id="lMasuk" disabled style="width:100%;margin-top:6px">Mulai latihan</button>
+  </div>`;
+  const sk = $('#lKelas'), sn = $('#lNama'), bm = $('#lMasuk'), msg = $('#lMsg');
+  let daftar = [];
+  sk.onchange = async () => {
+    sn.disabled = true; bm.disabled = true; sn.innerHTML = '<option>memuat…</option>'; msg.textContent = '';
+    if (!sk.value) { sn.innerHTML = '<option value="">— pilih kelas dulu —</option>'; return; }
+    if (!API) { msg.textContent = 'Mode uji (alamat server belum diatur): nama diisi contoh.'; daftar = Array.from({ length: 5 }, (_, i) => ({ absen: i + 1, nama: 'Murid Contoh ' + (i + 1) })); }
+    else {
+      try { const j = await apiGet({ aksi: 'murid', kelas: sk.value }); if (!j.ok) throw new Error(j.pesan || 'Gagal'); daftar = j.data; }
+      catch (e) { sn.innerHTML = '<option value="">—</option>'; msg.textContent = 'Daftar nama gagal dimuat. Periksa internet lalu pilih kelas lagi.'; return; }
+    }
+    sn.innerHTML = '<option value="">— pilih nama —</option>' + daftar.map(m => `<option value="${m.absen}">${m.absen}. ${esc(m.nama)}</option>`).join('');
+    sn.disabled = false;
+  };
+  sn.onchange = () => { bm.disabled = !sn.value; };
+  bm.onclick = () => {
+    const m = daftar.find(x => String(x.absen) === sn.value); if (!m) return;
+    USER = { kelas: sk.value, absen: m.absen, nama: m.nama }; LS.set('aska_lat_user', USER);
+    kirimLog({ t: Date.now(), kelas: USER.kelas, absen: USER.absen, nama: USER.nama, aktivitas: 'masuk' });
+    viewHome();
+  };
+}
+
+/* ===== Layar: beranda ===== */
+let TAB = 'latihan';
+function viewHome() {
+  header();
+  const p = prog();
+  const kartu = ASKA.JENIS.map(j => {
+    const x = p[j.no] || { coba: 0, benar: 0 };
+    const pct = Math.min(100, x.benar * 20);
+    return `<div class="card jenis">
+      <div class="top"><h3>Soal ${j.no}. ${j.nama}</h3><span class="tag ${j.kes}">${j.kes} · ${j.bobot}</span></div>
+      <div class="bar" title="target 5 kali benar"><i style="width:${pct}%"></i></div>
+      <div class="sm mut">Benar ${x.benar} kali dari ${x.coba} percobaan${x.benar >= 5 ? ' · ✔ target 5 kali tercapai' : ' · target 5 kali benar'}</div>
+      <div class="row"><button class="btn pri" data-lat="${j.no}">Latihan</button><button class="btn" data-mat="${j.no}">Baca materi</button></div>
+    </div>`;
+  }).join('');
+  const mat = MATERI.map(m => `<button class="btn" style="text-align:left" data-mat="${m.id}">${esc(m.judul)}</button>`).join('');
+  $('#app').innerHTML = `
+    <div class="tabs"><button class="btn ${TAB === 'latihan' ? 'act' : ''}" data-tab="latihan">Latihan soal</button><button class="btn ${TAB === 'materi' ? 'act' : ''}" data-tab="materi">Materi</button></div>
+    ${TAB === 'latihan' ? `
+      <div class="card"><h2>Halo, ${esc(USER.nama.split(' ')[0])}!</h2>
+      <p class="mut" style="margin:0">Ujian praktik berisi 6 soal Python dalam 60 menit. Latih setiap jenis soal di bawah sampai benar minimal 5 kali. Setiap kali latihan, angka dan ceritanya berbeda.</p></div>
+      <div class="grid6">${kartu}</div>` : `
+      <div class="card"><h2>Materi</h2><p class="mut">Bahan bacaan untuk setiap jenis soal.</p><div style="display:grid;gap:8px">${mat}</div></div>`}
+  `;
+  $('#app').querySelectorAll('[data-tab]').forEach(b => b.onclick = () => { TAB = b.dataset.tab; viewHome(); });
+  $('#app').querySelectorAll('[data-lat]').forEach(b => b.onclick = () => viewLatihan(+b.dataset.lat));
+  $('#app').querySelectorAll('[data-mat]').forEach(b => b.onclick = () => bukaMateri(+b.dataset.mat));
+}
+
+function bukaMateri(id) {
+  const m = MATERI.find(x => x.id === id);
+  kirimLog({ t: Date.now(), kelas: USER.kelas, absen: USER.absen, nama: USER.nama, aktivitas: 'materi', soal: id, judul: m.judul });
+  const d = document.createElement('div'); d.className = 'modal';
+  d.innerHTML = `<div class="card materi"><div class="row" style="justify-content:space-between"><h2>${esc(m.judul)}</h2><button class="btn" data-x>Tutup</button></div>${m.isi}
+  <div class="row" style="justify-content:space-between;margin-top:14px">${id > 0 ? `<button class="btn" data-p>‹ Sebelumnya</button>` : '<span></span>'}${id < MATERI.length - 1 ? `<button class="btn" data-n>Berikutnya ›</button>` : ''}</div></div>`;
+  document.body.appendChild(d);
+  const tutup = () => d.remove();
+  d.querySelector('[data-x]').onclick = tutup;
+  d.onclick = (e) => { if (e.target === d) tutup(); };
+  const p = d.querySelector('[data-p]'), n = d.querySelector('[data-n]');
+  if (p) p.onclick = () => { tutup(); bukaMateri(id - 1); };
+  if (n) n.onclick = () => { tutup(); bukaMateri(id + 1); };
+}
+
+/* ===== Layar: latihan ===== */
+let Q = null, sudahCek = false, lihatKunci = false;
+function soalHTML(q) {
+  const lines = q.teks.split('\n'); let h = '', inUl = false;
+  for (const ln of lines) {
+    if (ln.startsWith('• ')) { if (!inUl) { h += '<ul>'; inUl = true; } h += `<li>${esc(ln.slice(2))}</li>`; continue; }
+    if (inUl) { h += '</ul>'; inUl = false; }
+    const m = ln.match(/^(Input|Proses|Output):\s*(.*)$/);
+    h += m ? `<p><span class="lbl">${m[1]}:</span> ${esc(m[2])}</p>` : `<p>${esc(ln)}</p>`;
+  }
+  if (inUl) h += '</ul>';
+  if (q.contoh) h += `<div class="contoh"><b>Contoh:</b> ${esc(q.contoh)}</div>`;
+  return h;
+}
+function viewLatihan(no, seed) {
+  header();
+  seed = seed || ((Math.random() * 4294967296) >>> 0);
+  Q = ASKA.buatSoal(no, seed); sudahCek = false; lihatKunci = false;
+  const j = ASKA.JENIS[no - 1];
+  const draftKey = `aska_lat_draft_${USER.kelas}_${USER.absen}_${no}_${seed}`;
+  $('#app').innerHTML = `
+  <div class="row" style="margin-bottom:10px"><button class="btn" id="kembali">‹ Beranda</button><span class="tag ${j.kes}">Soal ${no} · ${j.kes} · bobot ${j.bobot}</span><span class="sp" style="flex:1"></span><span class="status" id="pyStatus"></span></div>
+  <div id="lat">
+    <div class="card">
+      <h2>${esc(Q.judul)}</h2>
+      <div class="soalteks">${soalHTML(Q)}</div>
+      <div class="row" style="margin-top:12px">
+        <button class="btn" id="bPet">Petunjuk</button>
+        <button class="btn" id="bMat">Materi</button>
+        <button class="btn" id="bKunci" disabled title="Terbuka setelah kamu menekan Cek Jawaban">Pembahasan</button>
+        <button class="btn" id="bBaru">Soal baru ↻</button>
+      </div>
+      <div id="petBox" class="box hide"></div>
+      <div id="kunciBox" class="box hide"></div>
+    </div>
+    <div class="card">
+      <div class="row" style="justify-content:space-between;margin-bottom:6px"><b>Program Python</b><span class="sm mut">Tab = 4 spasi</span></div>
+      <div class="edwrap"><div class="gut" id="gut">1</div><textarea class="ed" id="ed" spellcheck="false" autocomplete="off" autocapitalize="off"></textarea></div>
+      <div class="inout">
+        <div><div class="sm"><b>Input</b> <span class="mut">(satu nilai per baris)</span></div><textarea id="inp" spellcheck="false"></textarea></div>
+        <div><div class="sm"><b>Hasil</b></div><div class="out" id="out"></div></div>
+      </div>
+      <div class="row" style="margin-top:10px">
+        <button class="btn" id="bRun">▶ Jalankan</button>
+        <button class="btn ok" id="bCek">✔ Cek Jawaban</button>
+        <button class="btn" id="bReset">${Q.kode_awal ? 'Kembalikan kode awal' : 'Kosongkan'}</button>
+      </div>
+      <div id="hasil" class="hasil"></div>
+    </div>
+  </div>`;
+  if (!worker) startWorker(); else setStatus(wReady ? 'Python siap.' : 'Memuat Python…');
+  const ed = $('#ed'), gut = $('#gut');
+  ed.value = LS.get(draftKey, null) ?? (Q.kode_awal || '');
+  $('#inp').value = Q.tes[0].input.join('\n');
+  const syncGut = (errLine) => {
+    const n = ed.value.split('\n').length;
+    gut.innerHTML = Array.from({ length: n }, (_, i) => i + 1 === errLine ? `<span class="e">${i + 1}</span>` : String(i + 1)).join('\n');
+    gut.scrollTop = ed.scrollTop;
+  };
+  syncGut();
+  ed.addEventListener('scroll', () => { gut.scrollTop = ed.scrollTop; });
+  ed.addEventListener('input', () => { syncGut(); LS.set(draftKey, ed.value); });
+  ed.addEventListener('keydown', (e) => {
+    const s = ed.selectionStart, en = ed.selectionEnd, v = ed.value;
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      if (e.shiftKey) {
+        const ls = v.lastIndexOf('\n', s - 1) + 1;
+        const cut = v.slice(ls, ls + 4).match(/^ {1,4}/);
+        if (cut) { ed.value = v.slice(0, ls) + v.slice(ls + cut[0].length); ed.selectionStart = ed.selectionEnd = Math.max(ls, s - cut[0].length); }
+      } else { ed.value = v.slice(0, s) + '    ' + v.slice(en); ed.selectionStart = ed.selectionEnd = s + 4; }
+      ed.dispatchEvent(new Event('input'));
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      const ls = v.lastIndexOf('\n', s - 1) + 1; const line = v.slice(ls, s);
+      let ind = line.match(/^ */)[0]; if (/:\s*$/.test(line)) ind += '    ';
+      ed.value = v.slice(0, s) + '\n' + ind + v.slice(en); ed.selectionStart = ed.selectionEnd = s + 1 + ind.length;
+      ed.dispatchEvent(new Event('input'));
+    }
+  });
+  const outEl = $('#out');
+  const tampilErr = (err) => `<span class="err">✖ ${esc(err.jenis)}${err.baris ? ' (baris ' + err.baris + ')' : ''}: ${esc(err.pesan)}</span>`;
+
+  $('#kembali').onclick = () => viewHome();
+  $('#bBaru').onclick = () => viewLatihan(no);
+  $('#bMat').onclick = () => bukaMateri(no);
+  $('#bReset').onclick = () => { if (confirm('Kembalikan editor ke awal?')) { ed.value = Q.kode_awal || ''; ed.dispatchEvent(new Event('input')); } };
+  $('#bPet').onclick = () => {
+    const b = $('#petBox'); b.classList.toggle('hide');
+    b.innerHTML = '<b>Petunjuk</b><ul style="margin:6px 0 0 18px;padding:0">' + PETUNJUK[no].map(t => `<li>${esc(t)}</li>`).join('') + '</ul>';
+  };
+  $('#bKunci').onclick = () => {
+    const b = $('#kunciBox'); b.classList.toggle('hide');
+    if (!lihatKunci) { lihatKunci = true; kirimLog({ t: Date.now(), kelas: USER.kelas, absen: USER.absen, nama: USER.nama, aktivitas: 'pembahasan', soal: no, judul: Q.judul }); }
+    b.innerHTML = `<b>Pembahasan</b>
+      ${Q.bugs ? '<p style="margin:6px 0">Tiga kesalahan pada program:</p><ol style="margin:0 0 6px 18px;padding:0">' + Q.bugs.map(x => `<li>${esc(x)}</li>`).join('') + '</ol>' : ''}
+      <p class="sm mut" style="margin:6px 0">Contoh program yang benar (program lain boleh, asalkan hasilnya benar):</p>
+      <pre>${esc(Q.ref)}</pre>
+      <p class="sm mut" style="margin:0">Coba ketik ulang dengan caramu sendiri, lalu tekan Soal baru untuk berlatih dengan angka lain.</p>`;
+  };
+
+  $('#bRun').onclick = async () => {
+    const btn = $('#bRun'); btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Menjalankan';
+    const inputs = $('#inp').value.split('\n').filter((x, i, a) => !(i === a.length - 1 && x === ''));
+    const r = await runPy(ed.value, inputs, true);
+    outEl.innerHTML = esc(r.out) + (r.err ? tampilErr(r.err) : (r.out ? '' : '<span class="mut">(tidak ada hasil yang ditampilkan)</span>'));
+    syncGut(r.err && r.err.baris);
+    btn.disabled = false; btn.textContent = '▶ Jalankan';
+  };
+
+  $('#bCek').onclick = async () => {
+    const btn = $('#bCek'); btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Mengecek';
+    if (!ed.value.trim()) { $('#hasil').innerHTML = '<div class="banner no">Editor masih kosong.</div>'; btn.disabled = false; btn.textContent = '✔ Cek Jawaban'; return; }
+    const rows = []; let lolos = 0, adaErr = null;
+    for (const t of Q.tes) {
+      const r = await runPy(ed.value, t.input.map(String), false);
+      const ok = !r.err && ASKA.cocok(r.out, t);
+      if (ok) lolos++; if (r.err && !adaErr) adaErr = r.err;
+      rows.push(`<tr><td class="k">${esc(t.input.join(', '))}</td><td>${esc(ASKA.harapTeks(t))}</td><td class="k">${r.err ? tampilErr(r.err) : esc(r.out.trim() || '(kosong)')}</td><td class="${ok ? 'b-ok' : 'b-no'}">${ok ? '✔' : '✖'}</td></tr>`);
+    }
+    const benar = lolos === Q.tes.length;
+    syncGut(adaErr && adaErr.baris);
+    $('#hasil').innerHTML = `<div class="banner ${benar ? 'ok' : 'no'}">${benar ? '🎉 Benar! Semua ' + lolos + ' data uji lolos.' : `Lolos ${lolos} dari ${Q.tes.length} data uji. ${adaErr ? 'Perbaiki error dulu.' : 'Periksa logika, terutama data di batas.'}`}</div>
+      <table style="margin-top:8px"><tr><th>Input</th><th>Harus muncul</th><th>Hasil programmu</th><th></th></tr>${rows.join('')}</table>
+      ${benar ? '<div class="row" style="margin-top:10px"><button class="btn pri" id="bLanjut">Soal baru ↻</button></div>' : ''}`;
+    if ($('#bLanjut')) $('#bLanjut').onclick = () => viewLatihan(no);
+    catatProg(no, benar);
+    kirimLog({ t: Date.now(), kelas: USER.kelas, absen: USER.absen, nama: USER.nama, aktivitas: 'cek', soal: no, judul: Q.judul, lolos, total: Q.tes.length, benar, pembahasan: lihatKunci });
+    sudahCek = true; $('#bKunci').disabled = false; $('#bKunci').title = '';
+    btn.disabled = false; btn.textContent = '✔ Cek Jawaban';
+  };
+}
+
+/* ===== mulai ===== */
+if (USER) viewHome(); else viewLogin();
+flush();
+</script>
+</body>
+</html>
