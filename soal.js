@@ -296,6 +296,20 @@
     return a.join(' · ');
   }
 
-  G.ASKA = { RNG, buatSoal, cocok, harapTeks, JENIS, GEN };
+  // seed deterministik dari teks (FNV-1a 32-bit)
+  function seedDari(str) { let h = 0x811c9dc5; for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; } return h >>> 0; }
+  // satu paket ujian: 6 soal dengan konteks P (A-D) yang sama
+  function buatPaket(P, seed) {
+    const r = RNG(seed);
+    return GEN.map((g, i) => { const q = g(P, r); q.no = i + 1; q.konteks = P; q.bobot = [10, 10, 15, 15, 25, 25][i]; q.kesukaran = ['Mudah', 'Mudah', 'Sedang', 'Sedang', 'Sukar', 'Sukar'][i]; return q; });
+  }
+  // paket berdasarkan posisi duduk: baris A-D (4,4,4,5 kursi), pola papan catur
+  function paketKursi(absen) {
+    const a = (absen > 17 ? absen - 17 : absen) - 1;
+    const row = Math.min(3, Math.floor(a / 4)), seat = a - 4 * row;
+    return { sesi: absen > 17 ? 2 : 1, baris: 'ABCD'[row], kursi: seat + 1, paket: 'ABCD'[(seat + 2 * row) % 4] };
+  }
+
+  G.ASKA = { RNG, buatSoal, buatPaket, paketKursi, seedDari, cocok, harapTeks, JENIS, GEN };
   if (typeof module !== 'undefined') module.exports = G.ASKA;
 })(typeof window !== 'undefined' ? window : globalThis);
